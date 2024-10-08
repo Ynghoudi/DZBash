@@ -1,0 +1,19 @@
+#!/bin/bash
+
+find_files=$(grep -RIZ "123" target)
+
+if [[ -n "$find_files" ]]; then
+  xargs -0 cp -t . <<< "$find_files"
+  echo "cp - OK"
+else
+  echo "cp - FAILS"
+fi
+
+rm_files=$(grep -RLZ "123" target)
+
+if [[ -n "$rm_files" ]]; then
+  xargs -0 rm <<< "$rm_files"
+  echo "rm - OK"
+else
+  echo "rm - FAILS"
+fi
